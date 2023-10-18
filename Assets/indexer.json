@@ -1,0 +1,30 @@
+{
+    "@odata.context": "https://sofio-cog-search.search.windows.net/$metadata#indexers/$entity",
+    "@odata.etag": "\"0x8DBD025AB2795A6\"",
+    "name": "indexer-test",
+    "description": null,
+    "dataSourceName": "blob-ds",
+    "skillsetName": "embeddings-and-chunker",
+    "targetIndexName": "my-index",
+    "disabled": null,
+    "schedule": null,
+    "parameters": {
+      "batchSize": 1,
+      "maxFailedItems": -1,
+      "maxFailedItemsPerBatch": -1,
+      "base64EncodeKeys": null,
+      "configuration": {
+        "allowSkillsetToReadFileData": true,
+        "parsingMode": "default"
+      }
+    },
+    "fieldMappings": [],
+    "outputFieldMappings": [
+      {
+        "sourceFieldName": "/document/chunks",
+        "targetFieldName": "content"
+      }
+    ],
+    "cache": null,
+    "encryptionKey": null
+  }

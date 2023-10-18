@@ -1,0 +1,78 @@
+{
+    "@odata.context": "https://sofio-cog-search.search.windows.net/$metadata#skillsets/$entity",
+    "@odata.etag": "\"0x8DBCFEBF8813C26\"",
+    "name": "embeddings-and-chunker",
+    "description": "",
+    "skills": [
+      {
+        "@odata.type": "#Microsoft.Skills.Util.DocumentExtractionSkill",
+        "name": "#1",
+        "description": null,
+        "context": "/document",
+        "parsingMode": "default",
+        "dataToExtract": "contentAndMetadata",
+        "inputs": [
+          {
+            "name": "file_data",
+            "source": "/document/file_data"
+          }
+        ],
+        "outputs": [
+          {
+            "name": "content",
+            "targetName": "extracted_content"
+          },
+          {
+            "name": "normalized_images",
+            "targetName": "extracted_normalized_images"
+          }
+        ],
+        "configuration": {
+          "imageAction": "generateNormalizedImages",
+          "normalizedImageMaxWidth@odata.type": "#Int64",
+          "normalizedImageMaxWidth": 2000,
+          "normalizedImageMaxHeight@odata.type": "#Int64",
+          "normalizedImageMaxHeight": 2000
+        }
+      },
+      {
+        "@odata.type": "#Microsoft.Skills.Custom.WebApiSkill",
+        "name": "ChunkerAndEmbeddings",
+        "description": "Chunks text and generates embeddings for each chunk.  The embeddings are persisted to another index indicated by the TargetIndex http header.",
+        "context": "/document",
+        "uri": "[Url to your deployed function]]",
+        "httpMethod": "POST",
+        "timeout": "PT30S",
+        "batchSize": 1,
+        "degreeOfParallelism": 5,
+        "inputs": [
+          {
+            "name": "text",
+            "source": "/document/extracted_content"
+          },
+          {
+            "name": "filename",
+            "source": "/document/metadata_storage_path"
+          }
+        ],
+        "outputs": [
+          {
+            "name": "chunks",
+            "targetName": "chunks"
+          }
+        ],
+        "httpHeaders": {
+          "TargetIndex": "newtestindex",
+          "MaxTokensPerLine": "20",
+          "MaxTokensPerParagraph": "100",
+          "OverlapTokens": "50"
+        }
+      }
+    ],
+    "cognitiveServices": {
+      "@odata.type": "#Microsoft.Azure.Search.DefaultCognitiveServices",
+      "description": null
+    },
+    "knowledgeStore": null,
+    "encryptionKey": null
+  }

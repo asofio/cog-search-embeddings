@@ -1,0 +1,12 @@
+{
+    "IsEncrypted": false,
+    "Values": {
+        "AzureWebJobsStorage": "[Storage Account Connection String Required for Azure Functions]",
+        "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+        "AZURE_OPENAI_ENDPOINT": "[Azure Open AI Endpoint]",
+        "AZURE_OPENAI_ENDPOINT_KEY": "[Azure Open AI Key]",
+        "AZURE_OPENAI_TEXT_EMBEDDING_DEPLOYMENT_NAME": "[Name of the deployed embedding model within Azure Open AI]",
+        "AZURE_COGNITIVE_SEARCH_ENDPOINT": "[Cognitive Search Endpoint]",
+        "AZURE_COGNITIVE_SEARCH_ENDPOINT_KEY": "[Cognitive Search Key]"
+    }
+}

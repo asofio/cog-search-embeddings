@@ -7,6 +7,8 @@ This repo provides a sample HTTP Triggered Azure Function for use as a Custom Sk
 Here are some things you will need in order to make use of this Custom Skill:
 
 - [Azure Function App](https://learn.microsoft.com/en-us/azure/azure-functions/create-first-function-cli-csharp?tabs=linux%2Cazure-cli) where you will deploy this HTTP Triggered Azure Function
+  - If running locally, create a `local.settings.json` file and configure each setting appropriately. (A sample file is included [here](./sample.local.settings.json).)
+  - Once the Azure Function has been deployed to a Function App in Azure, a configuration setting will need to be added for each of the settings seen in the `local.settings.json` file.
 - [Azure Cognitive Search](https://learn.microsoft.com/en-us/azure/search/search-get-started-portal) instance
 - Azure Open AI instance with a deployed model to be used for generating embeddings
 - Azure Storage Account to act as a datasource for a Cognitive Search Indexer
